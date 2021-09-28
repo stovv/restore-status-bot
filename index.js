@@ -53,9 +53,9 @@ bot.start((ctx) =>
 );
 
 bot.help((ctx) => {
-    ctx.reply('The bot will notify you when the product on site https://re-store.ru is available for purchase on the site without pre-order');
-    ctx.reply('For start send me catalog id by example:');
-    ctx.reply('MLP23RU-A');
+    ctx.reply('The bot will notify you when the product on site re-store.ru is available for purchase on the site without pre-order \n\n' +
+        'For start send me catalog id by example: \n' +
+        'MLP23RU-A');
 })
 
 bot.command('unsubscribe', (ctx) => {
