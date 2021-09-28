@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   backend:
@@ -8,5 +8,9 @@ services:
     environment:
       TOKEN: ${BOT_TOKEN}
     volumes:
-      - ./.db:/app/.db
+      - ./:/app/
       - /app/node_modules
+  chrome:
+    image: yukinying/chrome-headless
+    ports:
+      - "9222:9222"

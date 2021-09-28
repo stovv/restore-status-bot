@@ -1,13 +1,32 @@
 const Datastore = require('nedb');
 const cheerio = require('cheerio');
-const rp = require('request-promise');
+//const reqpromise = require('request-promise');
 const CronJob = require('cron').CronJob;
 const { Telegraf, Markup } = require('telegraf');
+const HeadlessChrome = require('simple-headless-chrome');
 
 let db = new Datastore({filename : '.db'});
 db.loadDatabase();
-const bot = new Telegraf(process.env.TOKEN);
 
+const bot = new Telegraf(process.env.TOKEN);
+const browser = new HeadlessChrome({
+    headless: true,
+    launchChrome: false,
+    chrome: {
+        host: 'localhost',
+        port: 9222, // Chrome Docker default port
+        remote: true,
+    },
+    browserlog: true
+})
+
+async function rp(url) {
+    await browser.init()
+    const mainTab = await browser.newTab({ privateTab: false })
+    await mainTab.goTo(url);
+    console.log(mainTab);
+    await browser.close();
+}
 
 async function checkBuyAvailable(url){
     let title = url;
@@ -143,17 +162,18 @@ const job = new CronJob(
 null, true,
 'Europe/Moscow');
 
-bot.launch();
-job.start();
+// bot.launch();
+// job.start();
+//
+// process.once('SIGINT', () => {
+//     job.stop();
+//     bot.stop('SIGINT');
+// });
+//
+// process.once('SIGTERM', () => {
+//     job.stop();
+//     bot.stop('SIGTERM');
+// });
 
-process.once('SIGINT', () => {
-    job.stop();
-    bot.stop('SIGINT');
-});
 
-process.once('SIGTERM', () => {
-    job.stop();
-    bot.stop('SIGTERM');
-});
-
-
+checkIDOK('MLP23RU-A');
