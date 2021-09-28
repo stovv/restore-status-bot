@@ -36,6 +36,7 @@ async function checkIDOK(id){
         })
         .catch(function(err){
             //handle error
+            console.log(JSON.stringify(err));
             ok = false;
         });
 
