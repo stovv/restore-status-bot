@@ -8,5 +8,5 @@ services:
     environment:
       TOKEN: ${BOT_TOKEN}
     volumes:
-      - ./.db:/app/.db
+      - .:/app
       - /app/node_modules
