@@ -10,7 +10,14 @@ services:
     volumes:
       - ./:/app/
       - /app/node_modules
+    networks:
+      - headless
   chrome:
     image: yukinying/chrome-headless
     ports:
       - "9222:9222"
+    networks:
+      - headless
+
+networks:
+  headless:
