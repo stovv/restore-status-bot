@@ -52,6 +52,12 @@ bot.start((ctx) =>
         'Enjoy!')
 );
 
+bot.help((ctx) => {
+    ctx.reply('The bot will notify you when the product on site https://re-store.ru is available for purchase on the site without pre-order');
+    ctx.reply('For start send me catalog id by example:');
+    ctx.reply('MLP23RU-A');
+})
+
 bot.command('unsubscribe', (ctx) => {
     db.find({[ctx.chat.id]: true}, {}, function (err, docs){
         if (docs === null || docs?.length === 0) {
